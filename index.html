@@ -1,894 +1,795 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAZGAME | Faz Service, Faz Gaming</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afiq Fahmi · graphic & web design</title>
+  <!-- Google Fonts & iconify (for interactive icons) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    /* modern reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
+    }
 
-<style>
-:root
-{
-  --bg:#000;
-  --card:rgba(255,255,255,.08);
-  --text:#fff;
-  --muted:#d1d1d1;
-  --accent:#ffd84d;
-  --accent-dark:#e6c43d;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-a{text-decoration:none;color:inherit}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-header{position:sticky;top:0;z-index:1000;background:rgba(0,0,0,.95);backdrop-filter:blur(12px);padding:10px 16px}
-.header-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:800;font-size:18px;color:var(--accent)}
-.header-logos{display:flex;gap:14px}
-.header-logos img{width:22px;filter:invert(1);opacity:.85}
+    /* layout: sidebar + main */
+    .portfolio-wrapper {
+      display: flex;
+      min-height: 100vh;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
 
-.banner{position:relative;min-height:320px;overflow:hidden}
-.banner-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s}
-.banner-slide.active{opacity:1}
-.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.45),rgba(0,0,0,.9))}
-.banner-content{position:relative;z-index:2;padding:72px 16px}
-.banner-card{max-width:560px;background:rgba(8,8,12,.9);border-radius:20px;padding:26px}
-.hero-logo{font-size:32px;font-weight:800;letter-spacing:2px;color:#fff}
-.hero-logo span{color:var(--accent)}
-.tagline{margin-top:6px;font-weight:600;color:var(--accent)}
+    /* sidebar — profile card (clickable contact) */
+    .sidebar {
+      flex: 0 0 300px;
+      background: #ffffff;
+      padding: 2rem 1.5rem;
+      border-right: 1px solid #eef2f6;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
 
-.sticky-cta{position:sticky;top:62px;z-index:900;background:rgba(0,0,0,.92);padding:12px 16px}
-.btn{display:block;max-width:360px;margin:auto;padding:14px;border-radius:14px;background:var(--accent);color:#000;font-weight:800;text-align:center;transition:.2s}
-.btn:hover{background:var(--accent-dark)}
+    .profile h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+      color: #0f172a;
+    }
 
-/* Lightbox Modal */
-#imageModal{position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000;cursor:zoom-out}
-#imageModal.show{display:flex}
-#modalImg{max-width:95%;max-height:90vh;border-radius:16px;transform:scale(.9);transition:transform .3s ease;box-shadow:0 0 30px rgba(0,0,0,0.5)}
-#imageModal.show #modalImg{transform:scale(1)}
+    .profile .title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #3b82f6;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
 
-.installment-banner{margin-top:14px;font-size:12.5px;text-align:center;color:rgba(255,216,77,.9);font-weight:600;letter-spacing:.5px;animation:fadeInInstall 1.2s ease forwards;opacity:0}
-@keyframes fadeInInstall{to{opacity:1}}
+    .contact-info {
+      margin: 2rem 0;
+    }
 
-section{padding:60px 20px;max-width:1200px;margin:auto}
-.section-title{font-size:20px;font-weight:800;margin-bottom:10px}
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: #334155;
+      margin-bottom: 1rem;
+      transition: 0.2s;
+      cursor: pointer;
+    }
 
-.hot-grid{display:grid;gap:10px;margin-top:10px;justify-content:center;grid-template-columns:repeat(2, minmax(140px, 1fr))}
-@media(min-width:768px){.hot-grid{grid-template-columns:repeat(3, 220px)}}
-@media(min-width:1200px){.hot-grid{grid-template-columns:repeat(4, 240px)}}
+    .contact-item:hover {
+      color: #3b82f6;
+    }
 
-.hot-card{position:relative;width:100%;aspect-ratio:1/1;border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .25s ease;background:#111}
-.hot-card:hover{transform:translateY(-6px)}
-.hot-card img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-.hot-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.75))}
-.hot-card-content{position:absolute;bottom:18px;left:18px;right:18px;z-index:2}
-.hot-title{font-weight:800}
-.hot-desc{font-size:13px;color:var(--muted)}
+    .contact-item img {
+      width: 18px;
+      height: 18px;
+      opacity: 0.7;
+    }
 
-.fast-condition, .preorder-badge, .limited-badge{position:absolute;z-index:2;font-size:10px;font-weight:800;padding:6px 10px;border-radius:999px;top:14px}
-.fast-condition{left:14px}
-.fast-new{background:var(--accent);color:#000}
-.fast-used{background:rgba(255,255,255,.85);color:#000}
-.limited-badge{right:14px;background:#ff3b3b;color:#fff}
-.preorder-badge{right:14px;background:var(--accent);color:#000}
-.hero-stats{display:flex;gap:28px;margin:18px 0 22px;flex-wrap:wrap}
-.stat h2{font-size:20px;font-weight:800;color:var(--accent);line-height:1}
-.stat p{font-size:11px;color:rgba(255,255,255,.7);margin-top:4px}
-.counter-glow{animation:counterPulse 1.5s ease-in-out infinite alternate}
-@keyframes counterPulse{0%{text-shadow:0 0 4px rgba(255,216,77,.4)}100%{text-shadow:0 0 16px rgba(255,216,77,.9)}}
-.controls {
-  margin-bottom: 14px;
-  display: flex;
-  justify-content: flex-start; /* Aligns search box to left */
-}
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
 
-.filter-tabs {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-  justify-content: flex-start; /* Aligns filter buttons to left */
-}
-.banner-content {
-  position: relative;
-  z-index: 2;
-  padding: 72px 16px;
-  max-width: 1200px; /* Match the header width */
-  margin: auto;      /* Centers the container, but content inside stays left */
-  display: flex;
-  justify-content: flex-start;
-}
+    .social-links a {
+      display: inline-flex;
+      padding: 0.5rem;
+      background: #f1f5f9;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
 
-.banner-card {
-  max-width: 560px;
-  background: rgba(8, 8, 12, 0.9);
-  border-radius: 20px;
-  padding: 26px;
-  margin-left: 0; /* Ensures it stays to the left */
-}
-.section-title {
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 10px;
-  text-align: left; /* Explicitly align section titles to the left */
-}
-/* Ensure the container clips the zoomed image */
-.hot-card {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5; /* 1080x1350 ratio */
-  border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  background: #111;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    .social-links a:hover {
+      background: #3b82f6;
+    }
+    .social-links a:hover img {
+      filter: brightness(0) invert(1);
+    }
 
-/* Base style for the image with transition */
-.hot-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  transition: transform 0.5s ease; /* Smooth zoom duration */
-}
+    .social-links img {
+      width: 18px;
+      height: 18px;
+    }
 
-/* Trigger the zoom on hover */
-.hot-card:hover img {
-  transform: scale(1.15); /* Zoom in by 15% */
-}
+    .sidebar .btn {
+      display: inline-block;
+      background: #3b82f6;
+      color: white;
+      font-weight: 600;
+      padding: 0.8rem 1.5rem;
+      border-radius: 40px;
+      text-align: center;
+      transition: 0.2s;
+      border: none;
+      cursor: pointer;
+      margin-top: auto;
+    }
 
-/* Keep your existing card lift effect if desired */
-.hot-card:hover {
-  transform: translateY(-6px);
-  z-index: 5;
-}
- 
-/* ===================================
-   STRONG GAMING HOVER GLOW
-=================================== */
+    .sidebar .btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px -6px rgba(59,130,246,0.4);
+    }
 
-.hot-card {
-  box-shadow: 0 0 6px rgba(255,255,255,.05);
-}
+    /* main content */
+    .main-content {
+      flex: 1;
+      padding: 3rem 2.5rem;
+      overflow-y: auto;
+    }
 
-.hot-card:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 12px 30px rgba(0,0,0,.7),
-    0 0 12px rgba(255,216,77,.7),
-    0 0 22px rgba(255,174,0,.5);
-}
-/* ===================================
-   METALLIC STEEL REFLECTION SHINE
-=================================== */
+    section {
+      margin-bottom: 3.5rem;
+    }
 
-.hot-card {
-  position: relative;
-  overflow: hidden;
-}
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-/* Metallic sweep layer */
-.hot-card::before {
-  content: "";
-  position: absolute;
-  top: -40%;
-  left: -150%;
-  width: 70%;
-  height: 200%;
-  background: linear-gradient(
-    115deg,
-    transparent 0%,
-    rgba(255,255,255,0.05) 35%,
-    rgba(255,255,255,0.6) 48%,
-    rgba(255,255,255,0.95) 50%,
-    rgba(255,255,255,0.6) 52%,
-    rgba(255,255,255,0.05) 65%,
-    transparent 100%
-  );
-  transform: skewX(-25deg);
-  pointer-events: none;
-  opacity: 0;
-  filter: blur(0.8px); /* very sharp */
-}
+    .section-title span {
+      background: #3b82f6;
+      width: 6px;
+      height: 28px;
+      border-radius: 10px;
+      display: inline-block;
+    }
 
-/* Activate on hover */
-.hot-card:hover::before {
-  animation: metallicShine 0.6s ease forwards;
-  opacity: 1;
-}
+    .about-text {
+      font-size: 1rem;
+      color: #334155;
+      max-width: 720px;
+      margin-bottom: 1.5rem;
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 20px;
+      border: 1px solid #eef2f6;
+    }
 
-@keyframes metallicShine {
-  0% {
-    left: -150%;
-  }
-  100% {
-    left: 180%;
-  }
-}
+    /* skill chips */
+    .skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.5rem 0 0.5rem;
+    }
 
-.hot-card:hover::before {
-  animation: shineStrong 0.7s forwards;
-  opacity: 1;
-}
+    .skill-chip {
+      background: #eef2f6;
+      color: #1e293b;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: 0.1s;
+      cursor: default;
+    }
+    .skill-chip:hover {
+      background: #3b82f6;
+      color: white;
+    }
 
-@keyframes shineStrong {
-  to {
-    left: 180%;
-  }
-}
+    /* skill categories grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
 
-.hot-card:hover::before {
-  animation: shineStrong 0.8s forwards;
-}
+    .skill-card {
+      background: #f8fafc;
+      border: 1px solid #eef2f6;
+      border-radius: 20px;
+      padding: 1.5rem;
+      transition: 0.2s;
+    }
 
-@keyframes shineStrong {
-  to {
-    left: 180%;
-  }
-}
-/* ===============================
-   STRONGER 3D PARALLAX
-================================ */
+    .skill-card:hover {
+      border-color: #3b82f6;
+      box-shadow: 0 8px 20px -12px rgba(0,0,0,0.2);
+    }
 
-.tilt-card {
-  transform-style: preserve-3d;
-  perspective: 1400px;  /* was 1000 */
-  transition: transform .1s ease;
-  will-change: transform;
-}
+    .skill-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-.tilt-card img {
-  transform: translateZ(60px);
-}
+    .skill-card ul {
+      list-style: none;
+    }
 
-.tilt-card .hot-card-content,
-.tilt-card .fast-condition,
-.tilt-card .preorder-badge {
-  transform: translateZ(80px);
-}
+    .skill-card li {
+      font-size: 0.9rem;
+      padding: 0.4rem 0;
+      color: #334155;
+      border-bottom: 1px dashed #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .skill-card li img {
+      width: 16px;
+      opacity: 0.6;
+    }
 
-.tilt-card::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  background: radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.15), transparent 60%);
-  opacity:0;
-  transition: opacity .3s ease;
-  pointer-events:none;
-}
+    /* timeline for experience & education — now expandable */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-.tilt-card:hover::before {
-  opacity:1;
-}
-/* Stock Grid */
-.controls{margin-bottom:14px}
-.search-box{padding:14px;border-radius:14px;border:none;background:rgba(255,255,255,.08);color:#fff;width:100%;max-width:360px}
-.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.filter-btn{padding:8px 14px;border-radius:9999px;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:12px;cursor:pointer}
-.filter-btn.active{background:var(--accent);color:#000}
-.filter-count{margin-left:6px;background:#000;color:#fff;padding:2px 6px;border-radius:999px;font-size:10px}
+    .timeline-item {
+      background: #f8fafc;
+      border: 1px solid #eef2f6;
+      border-radius: 20px;
+      padding: 1.5rem;
+      position: relative;
+      transition: 0.2s;
+      cursor: pointer;
+    }
 
-.product-grid{display:grid;gap:14px}
-@media(min-width:768px){.product-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1100px){.product-grid{grid-template-columns:repeat(3,1fr)}}
-.product-card{background:rgba(255,255,255,.08);border-radius:16px;padding:12px;display:grid;grid-template-columns:72px 1fr;gap:12px;position:relative}
-.product-icon{width:72px;height:72px;border-radius:12px;background:#111;display:flex;align-items:center;justify-content:center}
-.product-icon img{width:34px;filter:invert(1)}
-.product-price{font-weight:800;margin-top:6px;color:var(--accent)}
-.check-btn{border:none;cursor:pointer;padding:6px 12px;border-radius:999px;font-size:11px;font-weight:800;background:var(--accent);color:#000;margin-top:8px}
+    .timeline-item:hover {
+      border-color: #3b82f6;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
 
-.type-badge{position:absolute;top:10px;right:10px;font-size:10px;font-weight:800;padding:3px 6px;border-radius:6px}
-.type-game{background:#3cff7f;color:#000}
-.type-console{background:#ffd84d;color:#000}
-.condition-badge{position:absolute;top:10px;left:10px;font-size:9px;font-weight:600;padding:2px 6px;border-radius:999px;text-transform:uppercase}
-.condition-new{background:rgba(255,216,77,.45)}
-.condition-used{background:rgba(255,255,255,.12)}
+    .timeline-item .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.service-chip{background:rgba(255,255,255,.08);padding:6px 12px;border-radius:999px;cursor:pointer;font-size:13px}
-.service-chip.primary{border:1px solid var(--accent);color:var(--accent)}
+    .timeline-period {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #3b82f6;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
 
-.social-item{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;background:rgba(255,255,255,.08);transition:.2s}
-.social-item img{width:20px;filter:invert(1)}
-.social-item:hover{background:rgba(255,216,77,.25);transform:translateY(-2px)}
+    .expand-icon {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: #94a3b8;
+      transition: 0.2s;
+    }
 
+    .timeline-item:hover .expand-icon {
+      color: #3b82f6;
+    }
 
-/* Payment Icons */
-.payment-icons{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:20px}
-.payment-item{display:flex;align-items:center;gap:10px;font-size:14px;opacity:0.8}
-.payment-item img{height:25px;filter:invert(1)}
+    .timeline-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0.5rem 0 0.2rem;
+    }
 
-/* Preloader */
-#preloader{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease}
-#preloader.hide{opacity:0;pointer-events:none}
-.loader-inner{text-align:center;width:240px}
-.loader-logo{font-size:26px;font-weight:800;margin-bottom:18px}
-.loader-logo span{color:var(--accent)}
-.loader-bar-wrap{width:100%;height:4px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden}
-.loader-bar{width:0%;height:100%;background:var(--accent);transition:width 0.1s}
-/* ===== Preorder Console Image Grid ===== */
+    .timeline-sub {
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-bottom: 0.5rem;
+    }
 
-#preorder-console {
-  padding: 70px 20px;
-}
+    .timeline-desc {
+      font-size: 0.95rem;
+      color: #334155;
+    }
 
-.preorder-grid {
-  display: grid;
-  gap: 24px;
-}
+    /* expanded content (hidden by default) */
+    .expand-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out, margin 0.3s;
+      background: #ffffff;
+      border-radius: 16px;
+      margin-top: 0;
+    }
 
-@media(min-width:768px){
-  .preorder-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+    .timeline-item.expanded .expand-content {
+      max-height: 500px; /* enough for details */
+      margin-top: 1.2rem;
+      padding: 1.2rem;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
 
-.preorder-card {
-  background: rgba(255,255,255,.05);
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(255,216,77,.15);
-  transition: transform .3s ease, box-shadow .3s ease;
-}
+    .expand-content ul {
+      list-style: none;
+    }
 
-.preorder-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(255,216,77,.15);
-}
+    .expand-content li {
+      font-size: 0.9rem;
+      padding: 0.4rem 0 0.4rem 1.2rem;
+      position: relative;
+      color: #334155;
+    }
 
-.preorder-image {
-  position: relative;
-  aspect-ratio: 4/5;
-  overflow: hidden;
-}
+    .expand-content li::before {
+      content: "•";
+      color: #3b82f6;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
 
-.preorder-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .5s ease;
-}
+    /* projects grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
 
-.preorder-card:hover img {
-  transform: scale(1.08);
-}
+    .project-card {
+      background: #ffffff;
+      border: 1px solid #eef2f6;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: 0.2s;
+    }
 
-.preorder-badge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: linear-gradient(45deg,#ffd84d,#ffae00);
-  color: #000;
-  font-size: 10px;
-  font-weight: 800;
-  padding: 6px 10px;
-  border-radius: 999px;
-}
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: #3b82f6;
+      box-shadow: 0 15px 25px -12px rgba(0,0,0,0.1);
+    }
 
-.preorder-badge.premium {
-  background: linear-gradient(45deg,#ffae00,#ff3b3b);
-  color: #fff;
-}
+    .project-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: #d9e2ef;
+    }
 
-.preorder-content {
-  padding: 16px;
-}
+    .project-info {
+      padding: 1.2rem;
+    }
 
-.preorder-content h3 {
-  font-size: 15px;
-  font-weight: 700;
-}
+    .project-info h4 {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
 
-.preorder-price {
-  color: var(--accent);
-  font-weight: 800;
-  margin: 8px 0 14px;
-}
+    .project-info p {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 0.75rem;
+    }
 
-.preorder-content button {
-  width: 100%;
-  padding: 10px;
-  border-radius: 12px;
-  border: none;
-  background: var(--accent);
-  color: #000;
-  font-weight: 800;
-  cursor: pointer;
-  transition: .2s;
-}
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
 
-.preorder-content button:hover {
-  background: var(--accent-dark);
-}
+    .project-tag {
+      background: #eef2f6;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      color: #1e293b;
+    }
 
-.preorder-card.highlight {
-  border: 1px solid rgba(255,216,77,.35);
-}
-footer{text-align:center;padding:40px;color:#aaa;font-size:13px}
-</style>
+    /* progress list */
+    .progress-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .progress-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 1.2rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .progress-bar-bg {
+      background: #e2e8f0;
+      height: 8px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 0.5rem 0 0.8rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: #3b82f6;
+      border-radius: 20px;
+    }
+
+    .progress-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    .footer-note {
+      border-top: 1px solid #eef2f6;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .portfolio-wrapper {
+        flex-direction: column;
+      }
+      .sidebar {
+        flex: auto;
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid #eef2f6;
+        padding: 1.5rem;
+      }
+      .main-content {
+        padding: 2rem 1.5rem;
+      }
+      .progress-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* preloader */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s;
+    }
+    #preloader.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
-
-<div id="preloader">
-  <div class="loader-inner">
-    <div class="loader-logo">FAZ<span>GAME</span></div>
-    <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
-  </div>
-</div>
-
-<div id="imageModal">
-  <img id="modalImg" src="" alt="Preview">
-</div>
-
-<header>
-  <div class="header-inner">
-    <div class="logo">FAZGAME</div>
-    <div class="header-logos">
-      <img src="https://api.iconify.design/simple-icons/playstation.svg">
-      <img src="https://api.iconify.design/simple-icons/xbox.svg">
-      <img src="https://api.iconify.design/simple-icons/nintendoswitch.svg">
-      <img src="https://api.iconify.design/mdi/desktop-classic.svg">
-    </div>
-  </div>
-</header>
-
-<div class="banner">
-  <div class="banner-slide active" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e')"></div>
-  <div class="banner-slide" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420')"></div>
-  <div class="banner-content">
-    <div class="banner-card">
-      <h1 class="hero-logo">FAZ<span>GAME</span></h1>
-      <p class="tagline"><strong>Faz</strong> Service, <strong>Faz</strong> Gaming</p>
-      
-      <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;">
-        <span class="service-chip primary" data-scroll="hot">Custom PC Build</span>
-        <span class="service-chip" data-scroll="hot">PC Parts & Upgrade</span>
-        <span class="service-chip" data-scroll="stock">Console & Games</span>
-        <span class="service-chip" data-scroll="stock">Inventory & Stock</span>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat"><h2 data-target="50">0</h2><p>Custom Builds</p></div>
-        <div class="stat"><h2 data-target="500">0</h2><p>Happy Customers</p></div>
-        <div class="stat"><h2 data-target="1">0</h2><p>Years Warranty</p></div>
-      </div>
-
-      <div style="margin-top:14px;display:flex;gap:18px">
-        <a class="social-item" href="https://www.tiktok.com/@syazeone" target="_blank"><img src="https://api.iconify.design/simple-icons/tiktok.svg"></a>
-        <a class="social-item" href="https://wa.me/60163691936" target="_blank"><img src="https://api.iconify.design/simple-icons/whatsapp.svg"></a>
-        <a class="social-item" href="https://www.instagram.com/fazgame_empire/" target="_blank"><img src="https://api.iconify.design/simple-icons/instagram.svg"></a>
-        <a class="social-item" href="https://www.facebook.com/share/1DHZdLi62G/" target="_blank"><img src="https://api.iconify.design/simple-icons/facebook.svg"></a>
-        <a class="social-item" href="https://t.me/fazgameofficial" target="_blank"><img src="https://api.iconify.design/simple-icons/telegram.svg"></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="sticky-cta"><a href="https://wa.me/60163691936" target="_blank" class="btn">Chat on WhatsApp</a></div>
-
-<section id="fast-sales" style="display:none;">
-  <h2 class="section-title">Fast Sales</h2>
-  <div style="font-size:13px; color:var(--accent); margin-bottom:10px;">🔥 While Stock Lasts</div>
-  <div class="hot-grid">
-    <div class="hot-card tilt-card">
-      <img src="images/ps5.jpg">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="limited-badge">LIMITED</span>
-      <div class="hot-card-content">
-        <div class="hot-title">PS5 Disc Set</div>
-        <div class="hot-desc">RM 1450 • Limited Stock</div>
-      </div>
-    </div>
-    <div class="hot-card tilt-card">
-      <img src="images/switch.jpg">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="limited-badge">LIMITED</span>
-      <div class="hot-card-content">
-        <div class="hot-title">Nintendo Switch 2</div>
-        <div class="hot-desc">RM 1500 • Limited Stock</div>
-      </div>
-    </div>
-  </div>
-</section>
-
- <section id="hot">
-  <h2 class="section-title">Preorder PC Builds</h2>
-<div style="font-size:13px;color:var(--accent);margin-bottom:14px;">
-  🖥 Custom Gaming PCs • Built On Demand
-</div>
-  <div class="hot-grid">
-    <div class="hot-card tilt-card"><img src="images/pc1000.jpg"><span class="preorder-badge">PRE-ORDER</span><div class="hot-card-content"><div class="hot-title">PC Budget from RM1,000</div><div class="hot-desc">Entry Gaming</div></div></div>
-    <div class="hot-card tilt-card"><img src="images/pc2000.jpg"><span class="preorder-badge">PRE-ORDER</span><div class="hot-card-content"><div class="hot-title">PC Budget from RM2,000</div><div class="hot-desc">Entry Gaming</div></div></div>
-    <div class="hot-card tilt-card"><img src="images/pc3000.jpg"><span class="preorder-badge">PRE-ORDER</span><div class="hot-card-content"><div class="hot-title">PC Budget from RM3,000</div><div class="hot-desc">Balanced Build</div></div></div>
-    <div class="hot-card tilt-card"><img src="images/pc3500.jpg"><span class="preorder-badge">PRE-ORDER</span><div class="hot-card-content"><div class="hot-title">PC Budget from RM3,000</div><div class="hot-desc">High Performance</div></div></div>
-    <div class="hot-card tilt-card"><img src="images/custompc.jpg"><span class="preorder-badge">PRE-ORDER</span><div class="hot-card-content"><div class="hot-title">Custom PC</div><div class="hot-desc">Free Setup</div></div></div>
-  </div>
-</section>
-
-<div class="installment-banner">💳 0% Interest Installment Available • SPayLater</div>
-<section id="preorder-console">
-  <h2 class="section-title">Preorder Consoles</h2>
-  <div style="font-size:13px;color:var(--accent);margin-bottom:14px;">
-    🎮 Used Units • Reserve Before Stock Arrival
+  <div id="preloader">
+    <div class="loader"></div>
   </div>
 
-  <div class="hot-grid">
-
-    <!-- PS4 SLIM -->
-    <div class="hot-card tilt-card">
-      <img src="images/ps4-slim.jpg" alt="PS4 Slim 500GB">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">PS4 Slim 500GB</div>
-        <div class="hot-desc">RM550</div>
+  <div class="portfolio-wrapper">
+    <!-- SIDEBAR : profile & contact (all clickable) -->
+    <aside class="sidebar">
+      <div class="profile">
+        <h1>Afiq Fahmi</h1>
+        <div class="title">Graphic & digital designer</div>
+        <p style="font-size:0.9rem; color:#475569; margin: 1rem 0 0;">Creative & results-driven designer with 4+ years in branding, print, and digital.</p>
       </div>
-    </div>
 
-    <!-- PS4 PRO -->
-    <div class="hot-card tilt-card">
-      <img src="images/ps4-pro.jpg" alt="PS4 Pro 1TB">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">PS4 Pro 1TB</div>
-        <div class="hot-desc">RM650</div>
+      <div class="contact-info">
+        <a class="contact-item" href="tel:+60199083295">
+          <img src="https://api.iconify.design/mdi/phone.svg" alt="phone"> 019-9083295
+        </a>
+        <a class="contact-item" href="mailto:Afqfahmi0013@gmail.com">
+          <img src="https://api.iconify.design/mdi/email.svg" alt="email"> Afqfahmi0013@gmail.com
+        </a>
+        <a class="contact-item" href="https://maps.google.com/?q=Setia+Alam+Shah+Alam" target="_blank">
+          <img src="https://api.iconify.design/mdi/map-marker.svg" alt="location"> Setia Alam, Shah Alam
+        </a>
       </div>
-    </div>
-    
 
-    <!-- PS5 FAT -->
-    <div class="hot-card tilt-card">
-      <img src="images/ps5-fat.jpg" alt="PS5 Fat Disc">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">PS5 Fat Disc</div>
-        <div class="hot-desc">RM1450</div>
+      <div class="social-links">
+        <a href="#"><img src="https://api.iconify.design/simple-icons/instagram.svg" alt="ig"></a>
+        <a href="#"><img src="https://api.iconify.design/simple-icons/facebook.svg" alt="fb"></a>
+        <a href="#"><img src="https://api.iconify.design/simple-icons/threads.svg" alt="threads"></a>
+        <a href="#"><img src="https://api.iconify.design/simple-icons/linkedin.svg" alt="li"></a>
+        <a href="https://wa.me/60199083295"><img src="https://api.iconify.design/simple-icons/whatsapp.svg" alt="wa"></a>
       </div>
-    </div>
 
-    <!-- PS5 SLIM -->
-    <div class="hot-card tilt-card">
-      <img src="images/ps5-slim.jpg" alt="PS5 Slim Disc">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">PS5 Slim Disc</div>
-        <div class="hot-desc">RM1650</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Photoshop</span>
+        <span class="skill-chip">Illustrator</span>
+        <span class="skill-chip">Canva</span>
+        <span class="skill-chip">Premiere Pro</span>
+        <span class="skill-chip">CapCut</span>
+        <span class="skill-chip">Branding</span>
+        <span class="skill-chip">Print</span>
       </div>
-    </div>
 
-    <!-- PS5 PRO -->
-    <div class="hot-card tilt-card">
-      <img src="images/ps5-pro.jpg" alt="PS5 Pro Digital">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">PS5 Pro Digital</div>
-        <div class="hot-desc">RM2750</div>
-      </div>
-    </div>
+      <a href="https://wa.me/60199083295" class="btn" id="sidebarCta">📥 Hire me on WhatsApp</a>
+    </aside>
 
-    <!-- SWITCH LITE -->
-    <div class="hot-card tilt-card">
-      <img src="images/switch-lite.jpg" alt="Nintendo Switch Lite">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">Nintendo Switch Lite</div>
-        <div class="hot-desc">RM400</div>
-      </div>
-    </div>
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
 
-    <!-- OLED WHITE -->
-    <div class="hot-card tilt-card">
-      <img src="images/switch-oled-white.jpg" alt="Switch OLED White">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">Switch OLED White</div>
-        <div class="hot-desc">RM750</div>
-      </div>
-    </div>
-
-    <!-- OLED NEON -->
-    <div class="hot-card tilt-card">
-      <img src="images/switch-oled-neon.jpg" alt="Switch OLED Neon">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">Switch OLED Neon</div>
-        <div class="hot-desc">RM750</div>
-      </div>
-    </div>
-
-    <!-- ZELDA -->
-    <div class="hot-card tilt-card">
-      <img src="images/switch-zelda.jpg" alt="Switch OLED Zelda Edition">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">Switch OLED Zelda Edition</div>
-        <div class="hot-desc">RM850</div>
-      </div>
-    </div>
-
-    <!-- SPLATOON -->
-    <div class="hot-card tilt-card">
-      <img src="images/switch-splatoon.jpg" alt="Switch OLED Splatoon Edition">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">Switch OLED Splatoon Edition</div>
-        <div class="hot-desc">RM850</div>
-      </div>
-    </div>
-
-    <!-- MARIO -->
-    <div class="hot-card tilt-card">
-      <img src="images/switch-mario.jpg" alt="Switch OLED Mario Edition">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">Switch OLED Mario Edition</div>
-        <div class="hot-desc">RM850</div>
-      </div>
-    </div>
-
-    <!-- POKEMON -->
-    <div class="hot-card tilt-card">
-      <img src="images/switch-pokemon.jpg" alt="Switch OLED Pokemon Edition">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">Switch OLED Pokemon Edition</div>
-        <div class="hot-desc">RM850</div>
-      </div>
-    </div>
-
-    <!-- SWITCH 2 -->
-    <div class="hot-card tilt-card">
-      <img src="images/switch-2.jpg" alt="Switch 2 Edition">
-      <span class="fast-condition fast-used">USED</span>
-      <span class="preorder-badge">PRE-ORDER</span>
-      <div class="hot-card-content">
-        <div class="hot-title">Switch 2 Edition</div>
-        <div class="hot-desc">RM1700</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-  
-<section id="stock">
-  <h2 class="section-title">Stock Available</h2>
-  <div class="controls"><input id="search" class="search-box" placeholder="Search item"></div>
-  <div class="filter-tabs" id="filters"></div>
-  <div class="product-grid" id="grid"></div>
-</section>
-
-<section id="payment">
-  <h2 class="section-title" style="text-align:center">Payment Methods</h2>
-
-  <div class="payment-icons">
-    <div class="payment-item">
-      <img src="https://cdn.simpleicons.org/shopee/ee4d2d" alt="SPayLater">
-      <span class="shopee-text">SPayLater Available</span>
-    </div>
-
-    <div class="payment-item">
-      <img src="https://cdn.simpleicons.org/visa/1a1f71" alt="Visa">
-      <span>FPX Online Banking</span>
-    </div>
-  </div>
-</section>
-
-<footer>© 2026 FAZGAME • Faz Service, Faz Gaming</footer>
-
-<script src="stock.js"></script>
-
-<script>
-let products = window.STOCK || [];
-
-const icons = {
-  console:'https://api.iconify.design/mdi/console.svg',
-  ps5:'https://api.iconify.design/simple-icons/playstation.svg',
-  ps4:'https://api.iconify.design/simple-icons/playstation.svg',
-  xbox:'https://api.iconify.design/simple-icons/xbox.svg',
-  switch:'https://api.iconify.design/simple-icons/nintendoswitch.svg',
-  pc:'https://api.iconify.design/mdi/desktop-classic.svg',
-  other:'https://api.iconify.design/mdi/gamepad-variant.svg'
-};
-
-const categories=['all','console','ps5','ps4','xbox','switch','pc','other'];
-let activeCat = 'all';
-
-const filters = document.getElementById('filters');
-const grid = document.getElementById('grid');
-const search = document.getElementById('search');
-
-categories.forEach(cat => {
-  const btn = document.createElement('button');
-  btn.className = 'filter-btn' + (cat === 'all' ? ' active' : '');
-  btn.innerHTML = `${cat.toUpperCase()} <span class="filter-count" id="count-${cat}">0</span>`;
-  btn.onclick = () => {
-    activeCat = cat;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderProducts();
-  };
-  filters.appendChild(btn);
-});
-
-function renderProducts() {
-  const q = search.value.toLowerCase();
-  const filtered = products.filter(p => (activeCat === 'all' || p.c === activeCat) && p.n.toLowerCase().includes(q));
-  
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--accent)">No items found.</div>`;
-  } else {
-    grid.innerHTML = filtered.map(p => `
-      <div class="product-card">
-        <span class="condition-badge condition-${p.cond}">${p.cond}</span>
-        <span class="type-badge type-${p.type}">${p.type}</span>
-        <div class="product-icon"><img src="${icons[p.c] || icons.other}"></div>
-        <div>
-          <div style="font-weight:700">${p.n}</div>
-          <div class="product-price">RM${p.p}</div>
-          <button class="check-btn" onclick="window.open('https://wa.me/60163691936?text=Inquiry: ${encodeURIComponent(p.n)}')">Check Availability</button>
+      <!-- ABOUT section (summary) -->
+      <section>
+        <div class="section-title"><span></span>About</div>
+        <div class="about-text">
+          “Creative and results-driven Graphic Designer with experience in digital marketing and sales. Skilled in visual storytelling, brand identity and entrepreneurship. Holds a Management degree from Universiti Utara Malaysia, with a strong foundation in design strategy and project leadership.”
         </div>
+      </section>
+
+      <!-- SKILLS (detailed) with FIXED ADOBE ICONS (simple-icons) -->
+      <section>
+        <div class="section-title"><span></span>Skills & expertise</div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3><img src="https://api.iconify.design/mdi/brush.svg" width="20"> Editing tools</h3>
+            <ul>
+              <li><img src="https://api.iconify.design/simple-icons/adobephotoshop.svg"> Photoshop</li>
+              <li><img src="https://api.iconify.design/simple-icons/adobeillustrator.svg"> Illustrator</li>
+              <li><img src="https://api.iconify.design/simple-icons/canva.svg"> Canva</li>
+              <li><img src="https://api.iconify.design/simple-icons/adobepremierepro.svg"> Premiere Pro</li>
+              <li><img src="https://api.iconify.design/simple-icons/capcut.svg"> CapCut</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3><img src="https://api.iconify.design/mdi/palette.svg" width="20"> Design expertise</h3>
+            <ul>
+              <li>Branding & Logo Design</li>
+              <li>Print (CMYK, bleed, cutting)</li>
+              <li>Apparel (sublimation, silkscreen)</li>
+              <li>Social Media Creative</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3><img src="https://api.iconify.design/mdi/account-group.svg" width="20"> Management</h3>
+            <ul>
+              <li>Team coordination (2-3 designers)</li>
+              <li>Project & deadline management</li>
+              <li>Client communication</li>
+              <li>Quality control & review</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3><img src="https://api.iconify.design/mdi/video.svg" width="20"> Media</h3>
+            <ul>
+              <li>Photo retouching & manipulation</li>
+              <li>Video editing & color grading</li>
+              <li>Basic video shooting</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE timeline (expandable) -->
+      <section>
+        <div class="section-title"><span></span>Experience (click to expand)</div>
+        <div class="timeline" id="experience-timeline">
+          <!-- Kidz Studios -->
+          <div class="timeline-item" onclick="toggleExpand(this)">
+            <div class="header">
+              <span class="timeline-period">2020 – present</span>
+              <span class="expand-icon">+</span>
+            </div>
+            <div class="timeline-title">Head of Creative Department</div>
+            <div class="timeline-sub">Kidz Studios Venture</div>
+            <div class="timeline-desc">Lead a creative team, ensure brand consistency, prepare print-ready artwork.</div>
+            <div class="expand-content">
+              <ul>
+                <li><strong>Creative Leadership:</strong> Led a small creative team (2-3 designers), ensuring timely delivery and brand consistency. Fostered collaboration across departments.</li>
+                <li><strong>Brand Identity:</strong> Translated client needs into strong visual identities. Developed brand guidelines and provided strategic branding advice.</li>
+                <li><strong>Digital & Print Design:</strong> Designed engaging visuals for social media, marketing campaigns, and print media. Skilled in preparing print-ready files (CMYK, bleed, cut lines).</li>
+                <li><strong>Photo & Video Editing:</strong> Proficient in photo manipulation, retouching, color correction, video shooting, editing, and color grading for marketing.</li>
+                <li><strong>Project Management:</strong> Coordinated multiple design projects simultaneously, ensuring quality and timely delivery.</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Zacon Niaga -->
+          <div class="timeline-item" onclick="toggleExpand(this)">
+            <div class="header">
+              <span class="timeline-period">2024 – 2025 (part‑time contract)</span>
+              <span class="expand-icon">+</span>
+            </div>
+            <div class="timeline-title">Digital Marketing & Graphic Designer</div>
+            <div class="timeline-sub">Zacon Niaga Sdn Bhd</div>
+            <div class="timeline-desc">Designed marketing materials, managed social media campaigns.</div>
+            <div class="expand-content">
+              <ul>
+                <li>Designed marketing materials including logos, posters, flyers, banners, brochures, and social media graphics.</li>
+                <li>Managed social media content and campaigns to increase engagement and reach.</li>
+                <li>Edited photos and videos for online use, including basic shooting, cutting, and color grading.</li>
+                <li>Developed brand identities and provided basic branding consultation to clients.</li>
+              </ul>
+            </div>
+          </div>
+          <!-- LEPSTTUA -->
+          <div class="timeline-item" onclick="toggleExpand(this)">
+            <div class="header">
+              <span class="timeline-period">2019 – 2020</span>
+              <span class="expand-icon">+</span>
+            </div>
+            <div class="timeline-title">Junior Digital Marketer</div>
+            <div class="timeline-sub">LEPSTTUA Sdn Bhd</div>
+            <div class="timeline-desc">Ran Facebook/Instagram ads, campaign planning, market research.</div>
+            <div class="expand-content">
+              <ul>
+                <li>Experienced in running Facebook and Instagram ads, planning marketing campaigns, and conducting market research.</li>
+                <li>Skilled in analyzing customer data based on age, location, and gender to identify target audiences and improve campaign performance.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION (expandable) -->
+      <section>
+        <div class="section-title"><span></span>Education (click to expand)</div>
+        <div class="timeline" id="education-timeline">
+          <div class="timeline-item" onclick="toggleExpand(this)">
+            <div class="header">
+              <span class="timeline-period">2014 – 2020</span>
+              <span class="expand-icon">+</span>
+            </div>
+            <div class="timeline-title">Bachelor of Entrepreneurship (Hons)</div>
+            <div class="timeline-sub">Universiti Utara Malaysia</div>
+            <div class="expand-content">
+              <ul><li>Major in Entrepreneurship, with coursework in marketing, management, and business strategy.</li></ul>
+            </div>
+          </div>
+          <div class="timeline-item" onclick="toggleExpand(this)">
+            <div class="header">
+              <span class="timeline-period">2013 – 2014</span>
+              <span class="expand-icon">+</span>
+            </div>
+            <div class="timeline-title">Diploma in Accountings</div>
+            <div class="timeline-sub">Kolej Matrikulasi Johor</div>
+            <div class="expand-content">
+              <ul><li>Foundation in accounting and finance.</li></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECT PORTFOLIO (sample) -->
+      <section>
+        <div class="section-title"><span></span>Recent projects</div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <img class="project-img" src="https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?w=400&auto=format" alt="brand">
+            <div class="project-info">
+              <h4>Kidz Studios rebrand</h4>
+              <p>Logo, stationery, brand guidelines</p>
+              <div class="project-tags"><span class="project-tag">branding</span><span class="project-tag">print</span></div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img class="project-img" src="https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=400&auto=format" alt="apparel">
+            <div class="project-info">
+              <h4>Sublimation jersey</h4>
+              <p>Silkscreen & HD print for esports team</p>
+              <div class="project-tags"><span class="project-tag">apparel</span><span class="project-tag">production</span></div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img class="project-img" src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400&auto=format" alt="print">
+            <div class="project-info">
+              <h4>Brochure & flyer set</h4>
+              <p>CMYK, bleed-ready for print</p>
+              <div class="project-tags"><span class="project-tag">print</span><span class="project-tag">marketing</span></div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img class="project-img" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&auto=format" alt="social">
+            <div class="project-info">
+              <h4>Social media campaign</h4>
+              <p>Instagram & FB creatives</p>
+              <div class="project-tags"><span class="project-tag">digital</span><span class="project-tag">social</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CURRENT FREELANCE / JOB PROGRESS -->
+      <section>
+        <div class="section-title"><span></span>Current freelance</div>
+        <div class="progress-list">
+          <div class="progress-item">
+            <div class="progress-header"><span>Bloom Cosmetics rebrand</span><span style="color:#3b82f6;">75%</span></div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:75%"></div></div>
+            <div class="progress-meta"><span>📅 due 12 Apr</span><span>🎯 final mockup</span></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header"><span>EcoGro packaging line</span><span style="color:#3b82f6;">40%</span></div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:40%"></div></div>
+            <div class="progress-meta"><span>📅 due 30 Apr</span><span>🎯 concept dev</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- footer note -->
+      <div class="footer-note">
+        © 2026 Afiq Fahmi · 019-9083295 · Afqfahmi0013@gmail.com
       </div>
-    `).join('');
-  }
+    </main>
+  </div>
 
-  categories.forEach(c => {
-    const el = document.getElementById('count-' + c);
-    if(el) el.textContent = c === 'all' ? products.length : products.filter(p => p.c === c).length;
-  });
-}
-
-search.oninput = renderProducts;
-renderProducts();
-</script>
-
-<script>
-// Fast Sales Sort
-const fastGrid = document.querySelector('#fast-sales .hot-grid');
-if(fastGrid) {
-  const cards = Array.from(fastGrid.children);
-  cards.sort((a,b) => (b.querySelector('.fast-new')?1:0) - (a.querySelector('.fast-new')?1:0));
-  cards.forEach(c => fastGrid.appendChild(c));
-}
-/* UI & LIGHTBOX LOGIC */
-window.addEventListener("DOMContentLoaded", () => {
-  // Loader logic
-  let progress = 0;
-  const bar = document.getElementById("loaderBar");
-  const preloader = document.getElementById("preloader");
-  const interval = setInterval(() => {
-    progress += 5;
-    if(bar) bar.style.width = progress + "%";
-    if(progress >= 100) {
-      clearInterval(interval);
-      setTimeout(() => {
-        preloader.classList.add("hide");
-        startCounters();
-      }, 400);
-    }
-  }, 50);
-
-  // Lightbox logic
-  const modal = document.getElementById("imageModal");
-  const modalImg = document.getElementById("modalImg");
-
-  document.addEventListener("click", (e) => {
-    const card = e.target.closest(".hot-card");
-    if(card) {
-      const img = card.querySelector("img");
-      if(img) {
-        modalImg.src = img.src;
-        modal.classList.add("show");
-        document.body.style.overflow = "hidden";
-      }
-    }
-  });
-
-  modal.onclick = () => {
-    modal.classList.remove("show");
-    document.body.style.overflow = "auto";
-  };
-});
-
-function startCounters() {
-  document.querySelectorAll(".stat h2").forEach(counter => {
-    const target = parseInt(counter.dataset.target);
-    let current = 0;
-    
-    // INCREASE THIS DIVISOR TO SLOW DOWN (e.g., 100 or 150)
-    // Higher number = Slower animation
-    const speedDivisor = 120; 
-
-    const update = () => {
-      current += target / speedDivisor;
-      
-      if(current < target) {
-        counter.innerText = Math.ceil(current);
-        requestAnimationFrame(update);
-      } else {
-        counter.innerText = target + "+";
-        // Optional: Keep your glow effect if you have the class defined
-        counter.classList.add("counter-glow"); 
-      }
-    };
-    update();
-  });
-}
-
-// Banner Slider
-let currentSlide = 0;
-const slides = document.querySelectorAll('.banner-slide');
-setInterval(() => {
-  slides[currentSlide].classList.remove('active');
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].classList.add('active');
-}, 4000);
-
-// Smooth Scroll
-document.querySelectorAll('[data-scroll]').forEach(chip => {
-  chip.onclick = () => {
-    const target = document.getElementById(chip.dataset.scroll);
-    if(target) target.scrollIntoView({behavior: 'smooth'});
-  };
-});
-</script>
-<script>
-const cards = document.querySelectorAll('.tilt-card');
-
-cards.forEach(card => {
-
-  // Disable on touch devices
-  if ('ontouchstart' in window) return;
-
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = -(y - centerY) / 7;
-    const rotateY = (x - centerX) / 7;
-
-    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-    card.style.setProperty('--x', `${x}px`);
-    card.style.setProperty('--y', `${y}px`);
-  });
-
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-  });
-
-});
-</script>
   <script>
-document.getElementById("wa-float").addEventListener("click", function(e){
-  e.preventDefault();
+    // toggle expand function for timeline items
+    function toggleExpand(el) {
+      el.classList.toggle('expanded');
+      const icon = el.querySelector('.expand-icon');
+      if (icon) {
+        icon.textContent = el.classList.contains('expanded') ? '−' : '+';
+      }
+    }
 
-  const phone = "60163691936";
-  const message = "Hi FAZGAME 👋 I'm interested in your products.";
-  const encoded = encodeURIComponent(message);
+    // preloader
+    window.addEventListener('load', function() {
+      const preloader = document.getElementById('preloader');
+      setTimeout(() => preloader.classList.add('hide'), 300);
+    });
 
-  const webUrl = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + encoded;
+    // sidebar CTA
+    document.getElementById('sidebarCta').addEventListener('click', function(e) {
+      e.preventDefault();
+      const phone = '60199083295';
+      const msg = 'Hi Afiq, I saw your portfolio and would like to discuss a project.';
+      window.location.href = 'https://api.whatsapp.com/send?phone=' + phone + '&text=' + encodeURIComponent(msg);
+    });
 
-  window.location.href = webUrl;
-});
-</script>
+    // make entire contact items work as links (already <a>)
+  </script>
 </body>
 </html>
