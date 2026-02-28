@@ -369,6 +369,7 @@
       border-radius: 20px;
       overflow: hidden;
       transition: 0.2s;
+      cursor: pointer;
     }
 
     .project-card:hover {
@@ -413,46 +414,32 @@
       color: #1e293b;
     }
 
-    /* progress list */
-    .progress-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+    /* Lightbox modal */
+    #imageModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(6px);
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 20px;
     }
-
-    .progress-item {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+    #imageModal.show {
+      display: flex;
+    }
+    #modalImg {
+      max-width: 95%;
+      max-height: 90vh;
       border-radius: 16px;
-      padding: 1.2rem;
+      box-shadow: 0 0 50px rgba(0,0,0,0.6);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
     }
-
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-
-    .progress-bar-bg {
-      background: #e2e8f0;
-      height: 8px;
-      border-radius: 20px;
-      overflow: hidden;
-      margin: 0.5rem 0 0.8rem;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: #3b82f6;
-      border-radius: 20px;
-    }
-
-    .progress-meta {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.8rem;
-      color: #64748b;
+    #imageModal.show #modalImg {
+      transform: scale(1);
     }
 
     .footer-note {
@@ -480,9 +467,6 @@
       }
       .main-content {
         padding: 2rem 1.5rem;
-      }
-      .progress-list {
-        grid-template-columns: 1fr;
       }
     }
 
@@ -516,6 +500,9 @@
   <div id="preloader">
     <div class="loader"></div>
   </div>
+
+  <!-- Lightbox Modal -->
+  <div id="imageModal"><img id="modalImg" src="" alt="Preview"></div>
 
   <div class="portfolio-wrapper">
     <!-- SIDEBAR : profile & contact (all clickable) -->
@@ -702,11 +689,11 @@
         </div>
       </section>
 
-      <!-- PROJECT PORTFOLIO (sample) -->
+      <!-- PROJECT PORTFOLIO (clickable gallery) -->
       <section>
-        <div class="section-title"><span></span>Recent projects</div>
-        <div class="projects-grid">
-          <div class="project-card">
+        <div class="section-title"><span></span>Recent projects (click to enlarge)</div>
+        <div class="projects-grid" id="gallery">
+          <div class="project-card" onclick="openLightbox('https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?w=600&auto=format')">
             <img class="project-img" src="https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?w=400&auto=format" alt="brand">
             <div class="project-info">
               <h4>Kidz Studios rebrand</h4>
@@ -714,7 +701,7 @@
               <div class="project-tags"><span class="project-tag">branding</span><span class="project-tag">print</span></div>
             </div>
           </div>
-          <div class="project-card">
+          <div class="project-card" onclick="openLightbox('https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=600&auto=format')">
             <img class="project-img" src="https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=400&auto=format" alt="apparel">
             <div class="project-info">
               <h4>Sublimation jersey</h4>
@@ -722,7 +709,7 @@
               <div class="project-tags"><span class="project-tag">apparel</span><span class="project-tag">production</span></div>
             </div>
           </div>
-          <div class="project-card">
+          <div class="project-card" onclick="openLightbox('https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=600&auto=format')">
             <img class="project-img" src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400&auto=format" alt="print">
             <div class="project-info">
               <h4>Brochure & flyer set</h4>
@@ -730,30 +717,13 @@
               <div class="project-tags"><span class="project-tag">print</span><span class="project-tag">marketing</span></div>
             </div>
           </div>
-          <div class="project-card">
+          <div class="project-card" onclick="openLightbox('https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&auto=format')">
             <img class="project-img" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&auto=format" alt="social">
             <div class="project-info">
               <h4>Social media campaign</h4>
               <p>Instagram & FB creatives</p>
               <div class="project-tags"><span class="project-tag">digital</span><span class="project-tag">social</span></div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CURRENT FREELANCE / JOB PROGRESS -->
-      <section>
-        <div class="section-title"><span></span>Current freelance</div>
-        <div class="progress-list">
-          <div class="progress-item">
-            <div class="progress-header"><span>Bloom Cosmetics rebrand</span><span style="color:#3b82f6;">75%</span></div>
-            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:75%"></div></div>
-            <div class="progress-meta"><span>📅 due 12 Apr</span><span>🎯 final mockup</span></div>
-          </div>
-          <div class="progress-item">
-            <div class="progress-header"><span>EcoGro packaging line</span><span style="color:#3b82f6;">40%</span></div>
-            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:40%"></div></div>
-            <div class="progress-meta"><span>📅 due 30 Apr</span><span>🎯 concept dev</span></div>
           </div>
         </div>
       </section>
@@ -775,6 +745,21 @@
       }
     }
 
+    // Lightbox functions
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImg');
+
+    function openLightbox(src) {
+      modalImg.src = src;
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    modal.onclick = function() {
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    };
+
     // preloader
     window.addEventListener('load', function() {
       const preloader = document.getElementById('preloader');
@@ -788,8 +773,6 @@
       const msg = 'Hi Afiq, I saw your portfolio and would like to discuss a project.';
       window.location.href = 'https://api.whatsapp.com/send?phone=' + phone + '&text=' + encodeURIComponent(msg);
     });
-
-    // make entire contact items work as links (already <a>)
   </script>
 </body>
 </html>
