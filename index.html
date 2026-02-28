@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Afiq Fahmi · graphic & web design</title>
-  <!-- Google Fonts & iconify -->
+  <!-- Google Fonts & iconify (for interactive icons) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -82,7 +82,6 @@
       margin-bottom: 1rem;
       transition: 0.2s;
       cursor: pointer;
-      padding: 0.2rem 0;
     }
 
     .contact-item:hover {
@@ -90,23 +89,23 @@
     }
 
     .contact-item img {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       opacity: 0.7;
     }
 
     .social-links {
       display: flex;
-      gap: 0.8rem;
+      gap: 1rem;
       margin: 1.5rem 0;
       flex-wrap: wrap;
     }
 
     .social-links a {
       display: inline-flex;
-      padding: 0.7rem;
+      padding: 0.5rem;
       background: #f1f5f9;
-      border-radius: 12px;
+      border-radius: 10px;
       transition: 0.2s;
     }
 
@@ -118,23 +117,22 @@
     }
 
     .social-links img {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
     }
 
     .sidebar .btn {
       display: inline-block;
       background: #3b82f6;
       color: white;
-      font-weight: 700;
-      padding: 1rem 1.5rem;
-      border-radius: 50px;
+      font-weight: 600;
+      padding: 0.8rem 1.5rem;
+      border-radius: 40px;
       text-align: center;
       transition: 0.2s;
       border: none;
       cursor: pointer;
       margin-top: auto;
-      font-size: 1.1rem;
     }
 
     .sidebar .btn:hover {
@@ -195,9 +193,9 @@
     .skill-chip {
       background: #eef2f6;
       color: #1e293b;
-      padding: 0.6rem 1.2rem;
-      border-radius: 40px;
-      font-size: 0.9rem;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
       font-weight: 500;
       transition: 0.1s;
       cursor: default;
@@ -256,7 +254,7 @@
       opacity: 0.6;
     }
 
-    /* timeline for experience & education — expandable */
+    /* timeline for experience & education — now expandable */
     .timeline {
       display: flex;
       flex-direction: column;
@@ -293,11 +291,10 @@
     }
 
     .expand-icon {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: 300;
       color: #94a3b8;
       transition: 0.2s;
-      padding: 0.2rem 0.5rem;
     }
 
     .timeline-item:hover .expand-icon {
@@ -332,7 +329,7 @@
     }
 
     .timeline-item.expanded .expand-content {
-      max-height: 500px;
+      max-height: 500px; /* enough for details */
       margin-top: 1.2rem;
       padding: 1.2rem;
       border: 1px solid #e2e8f0;
@@ -383,7 +380,7 @@
 
     .project-img {
       width: 100%;
-      height: 180px;
+      height: 160px;
       object-fit: cover;
       background: #d9e2ef;
     }
@@ -395,11 +392,10 @@
     .project-info h4 {
       font-weight: 700;
       margin-bottom: 0.25rem;
-      font-size: 1.1rem;
     }
 
     .project-info p {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #64748b;
       margin-bottom: 0.75rem;
     }
@@ -412,8 +408,8 @@
 
     .project-tag {
       background: #eef2f6;
-      font-size: 0.75rem;
-      padding: 0.3rem 0.9rem;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.7rem;
       border-radius: 30px;
       color: #1e293b;
     }
@@ -422,25 +418,25 @@
     #imageModal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(6px);
       z-index: 10001;
       display: none;
       align-items: center;
       justify-content: center;
       cursor: zoom-out;
-      padding: 10px;
+      padding: 20px;
     }
     #imageModal.show {
       display: flex;
     }
     #modalImg {
-      max-width: 100%;
+      max-width: 95%;
       max-height: 90vh;
       border-radius: 16px;
-      box-shadow: 0 0 40px rgba(0,0,0,0.8);
-      transform: scale(0.95);
-      transition: transform 0.2s ease;
+      box-shadow: 0 0 50px rgba(0,0,0,0.6);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
     }
     #imageModal.show #modalImg {
       transform: scale(1);
@@ -455,7 +451,7 @@
       font-size: 0.9rem;
     }
 
-    /* ========== PHONE OPTIMIZATION ========== */
+    /* responsive */
     @media (max-width: 900px) {
       .portfolio-wrapper {
         flex-direction: column;
@@ -471,90 +467,6 @@
       }
       .main-content {
         padding: 2rem 1.5rem;
-      }
-    }
-
-    @media (max-width: 600px) {
-      body {
-        font-size: 16px;
-      }
-      .sidebar {
-        padding: 1.2rem;
-      }
-      .profile h1 {
-        font-size: 1.8rem;
-      }
-      .profile .title {
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-      }
-      .contact-item {
-        font-size: 1rem;
-        padding: 0.5rem 0;
-      }
-      .contact-item img {
-        width: 22px;
-        height: 22px;
-      }
-      .social-links {
-        gap: 0.5rem;
-      }
-      .social-links a {
-        padding: 0.8rem;
-        border-radius: 14px;
-      }
-      .social-links img {
-        width: 22px;
-        height: 22px;
-      }
-      .skill-chips {
-        gap: 0.4rem;
-      }
-      .skill-chip {
-        padding: 0.6rem 1rem;
-        font-size: 0.85rem;
-      }
-      .sidebar .btn {
-        padding: 1rem 1.2rem;
-        font-size: 1.1rem;
-        margin-top: 1.5rem;
-      }
-      .main-content {
-        padding: 1.5rem 1.2rem;
-      }
-      .section-title {
-        font-size: 1.6rem;
-      }
-      .about-text {
-        padding: 1.2rem;
-        font-size: 0.95rem;
-      }
-      .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      .skill-card {
-        padding: 1.2rem;
-      }
-      .timeline-item {
-        padding: 1.2rem;
-      }
-      .timeline-title {
-        font-size: 1.1rem;
-      }
-      .expand-icon {
-        font-size: 1.8rem;
-      }
-      .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      .project-img {
-        height: 160px;
-      }
-      .footer-note {
-        font-size: 0.8rem;
-        padding-top: 1.5rem;
       }
     }
 
@@ -645,7 +557,7 @@
         </div>
       </section>
 
-      <!-- SKILLS (detailed) with ADOBE ICONS -->
+      <!-- SKILLS (detailed) with FIXED ADOBE ICONS (simple-icons) -->
       <section>
         <div class="section-title"><span></span>Skills & expertise</div>
         <div class="skills-grid">
@@ -777,37 +689,36 @@
         </div>
       </section>
 
-      <!-- PROJECT PORTFOLIO (clickable gallery) using local .webp images -->
+      <!-- PROJECT PORTFOLIO (clickable gallery) -->
       <section>
-        <div class="section-title"><span></span>Recent projects (tap to enlarge)</div>
+        <div class="section-title"><span></span>Recent projects (click to enlarge)</div>
         <div class="projects-grid" id="gallery">
-          <!-- Replace the src with your own .webp files (place them in the same folder) -->
-          <div class="project-card" onclick="openLightbox('./project1.webp')">
-            <img class="project-img" src="./project1.webp" alt="Branding project" onerror="this.src='https://via.placeholder.com/400x180?text=Image+not+found'">
+          <div class="project-card" onclick="openLightbox('https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?w=600&auto=format')">
+            <img class="project-img" src="https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?w=400&auto=format" alt="brand">
             <div class="project-info">
               <h4>Kidz Studios rebrand</h4>
               <p>Logo, stationery, brand guidelines</p>
               <div class="project-tags"><span class="project-tag">branding</span><span class="project-tag">print</span></div>
             </div>
           </div>
-          <div class="project-card" onclick="openLightbox('./project2.webp')">
-            <img class="project-img" src="./project2.webp" alt="Apparel design" onerror="this.src='https://via.placeholder.com/400x180?text=Image+not+found'">
+          <div class="project-card" onclick="openLightbox('https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=600&auto=format')">
+            <img class="project-img" src="https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=400&auto=format" alt="apparel">
             <div class="project-info">
               <h4>Sublimation jersey</h4>
               <p>Silkscreen & HD print for esports team</p>
               <div class="project-tags"><span class="project-tag">apparel</span><span class="project-tag">production</span></div>
             </div>
           </div>
-          <div class="project-card" onclick="openLightbox('./project3.webp')">
-            <img class="project-img" src="./project3.webp" alt="Print design" onerror="this.src='https://via.placeholder.com/400x180?text=Image+not+found'">
+          <div class="project-card" onclick="openLightbox('https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=600&auto=format')">
+            <img class="project-img" src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400&auto=format" alt="print">
             <div class="project-info">
               <h4>Brochure & flyer set</h4>
               <p>CMYK, bleed-ready for print</p>
               <div class="project-tags"><span class="project-tag">print</span><span class="project-tag">marketing</span></div>
             </div>
           </div>
-          <div class="project-card" onclick="openLightbox('./project4.webp')">
-            <img class="project-img" src="./project4.webp" alt="Social media campaign" onerror="this.src='https://via.placeholder.com/400x180?text=Image+not+found'">
+          <div class="project-card" onclick="openLightbox('https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&auto=format')">
+            <img class="project-img" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&auto=format" alt="social">
             <div class="project-info">
               <h4>Social media campaign</h4>
               <p>Instagram & FB creatives</p>
@@ -815,7 +726,6 @@
             </div>
           </div>
         </div>
-        <p style="font-size:0.8rem; color:#64748b; margin-top:0.5rem;">* Place your own project1.webp – project4.webp in the same folder, or update the paths.</p>
       </section>
 
       <!-- footer note -->
