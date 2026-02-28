@@ -21,6 +21,7 @@
       background: #f8fafc;
       color: #0f172a;
       line-height: 1.5;
+      overflow-x: hidden;
     }
 
     a {
@@ -36,6 +37,12 @@
       margin: 0 auto;
       background: #ffffff;
       box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      animation: wrapperFadeIn 0.8s ease-out;
+    }
+
+    @keyframes wrapperFadeIn {
+      0% { opacity: 0; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     /* sidebar — profile card (clickable contact) */
@@ -50,6 +57,12 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
+      animation: sidebarSlideIn 0.6s ease-out;
+    }
+
+    @keyframes sidebarSlideIn {
+      0% { opacity: 0; transform: translateX(-20px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
 
     .profile h1 {
@@ -87,6 +100,7 @@
 
     .contact-item:hover {
       color: #3b82f6;
+      transform: translateX(5px);
     }
 
     .contact-item img {
@@ -112,6 +126,7 @@
 
     .social-links a:hover {
       background: #3b82f6;
+      transform: translateY(-3px);
     }
     .social-links a:hover img {
       filter: brightness(0) invert(1);
@@ -135,12 +150,20 @@
       cursor: pointer;
       margin-top: auto;
       font-size: 1.1rem;
+      animation: btnPulse 2s infinite;
+    }
+
+    @keyframes btnPulse {
+      0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(59,130,246,0); }
+      100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
     }
 
     .sidebar .btn:hover {
       background: #2563eb;
       transform: translateY(-2px);
       box-shadow: 0 8px 16px -6px rgba(59,130,246,0.4);
+      animation: none;
     }
 
     /* main content */
@@ -148,10 +171,25 @@
       flex: 1;
       padding: 3rem 2.5rem;
       overflow-y: auto;
+      animation: mainFadeIn 0.8s ease-out 0.1s both;
     }
 
-    section {
+    @keyframes mainFadeIn {
+      0% { opacity: 0; transform: translateY(15px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* sections with scroll animation */
+    .section {
       margin-bottom: 3.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .section-title {
@@ -199,12 +237,13 @@
       border-radius: 40px;
       font-size: 0.9rem;
       font-weight: 500;
-      transition: 0.1s;
+      transition: 0.2s;
       cursor: default;
     }
     .skill-chip:hover {
       background: #3b82f6;
       color: white;
+      transform: scale(1.05);
     }
 
     /* skill categories grid */
@@ -220,12 +259,13 @@
       border: 1px solid #eef2f6;
       border-radius: 20px;
       padding: 1.5rem;
-      transition: 0.2s;
+      transition: 0.3s;
     }
 
     .skill-card:hover {
       border-color: #3b82f6;
       box-shadow: 0 8px 20px -12px rgba(0,0,0,0.2);
+      transform: translateY(-5px);
     }
 
     .skill-card h3 {
@@ -269,13 +309,14 @@
       border-radius: 20px;
       padding: 1.5rem;
       position: relative;
-      transition: 0.2s;
+      transition: 0.3s;
       cursor: pointer;
     }
 
     .timeline-item:hover {
       border-color: #3b82f6;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      box-shadow: 0 8px 20px -12px rgba(0,0,0,0.2);
+      transform: translateY(-3px);
     }
 
     .timeline-item .header {
@@ -325,7 +366,7 @@
     .expand-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease-out, margin 0.3s;
+      transition: max-height 0.5s ease-out, margin 0.3s;
       background: #ffffff;
       border-radius: 16px;
       margin-top: 0;
@@ -371,14 +412,14 @@
       border: 1px solid #eef2f6;
       border-radius: 20px;
       overflow: hidden;
-      transition: 0.2s;
+      transition: 0.3s;
       cursor: pointer;
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-8px) scale(1.02);
       border-color: #3b82f6;
-      box-shadow: 0 15px 25px -12px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 30px -12px rgba(59,130,246,0.25);
     }
 
     .project-img {
@@ -386,6 +427,11 @@
       height: 180px;
       object-fit: cover;
       background: #d9e2ef;
+      transition: transform 0.5s;
+    }
+
+    .project-card:hover .project-img {
+      transform: scale(1.05);
     }
 
     .project-info {
@@ -430,7 +476,14 @@
       justify-content: center;
       cursor: zoom-out;
       padding: 10px;
+      animation: modalFadeIn 0.3s;
     }
+
+    @keyframes modalFadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
     #imageModal.show {
       display: flex;
     }
@@ -453,12 +506,18 @@
       text-align: center;
       color: #64748b;
       font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .footer-note:hover {
+      color: #3b82f6;
     }
 
     /* ========== PHONE OPTIMIZATION ========== */
     @media (max-width: 900px) {
       .portfolio-wrapper {
         flex-direction: column;
+        animation: none; /* avoid scale on mobile */
       }
       .sidebar {
         flex: auto;
@@ -468,9 +527,11 @@
         border-right: none;
         border-bottom: 1px solid #eef2f6;
         padding: 1.5rem;
+        animation: none;
       }
       .main-content {
         padding: 2rem 1.5rem;
+        animation: none;
       }
     }
 
@@ -558,7 +619,7 @@
       }
     }
 
-    /* ===== PRELOADER (fullscreen, hides only after all images loaded) ===== */
+    /* ===== PRELOADER ===== */
     #preloader {
       position: fixed;
       inset: 0;
@@ -591,7 +652,7 @@
   </style>
 </head>
 <body>
-  <!-- PRELOADER: visible until all images are confirmed loaded -->
+  <!-- PRELOADER -->
   <div id="preloader">
     <div style="text-align: center;">
       <div class="loader"></div>
@@ -646,17 +707,15 @@
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-
-      <!-- ABOUT section (summary) -->
-      <section>
+      <!-- All sections have class "section" for scroll animation -->
+      <section class="section" id="about">
         <div class="section-title"><span></span>About</div>
         <div class="about-text">
           “Creative and results-driven Graphic Designer with experience in digital marketing and sales. Skilled in visual storytelling, brand identity and entrepreneurship. Holds a Management degree from Universiti Utara Malaysia, with a strong foundation in design strategy and project leadership.”
         </div>
       </section>
 
-      <!-- SKILLS (detailed) with ADOBE ICONS -->
-      <section>
+      <section class="section" id="skills">
         <div class="section-title"><span></span>Skills & expertise</div>
         <div class="skills-grid">
           <div class="skill-card">
@@ -698,8 +757,7 @@
         </div>
       </section>
 
-      <!-- EXPERIENCE timeline (expandable) -->
-      <section>
+      <section class="section" id="experience">
         <div class="section-title"><span></span>Experience (click to expand)</div>
         <div class="timeline" id="experience-timeline">
           <!-- Kidz Studios -->
@@ -758,8 +816,7 @@
         </div>
       </section>
 
-      <!-- EDUCATION (expandable) -->
-      <section>
+      <section class="section" id="education">
         <div class="section-title"><span></span>Education (click to expand)</div>
         <div class="timeline" id="education-timeline">
           <div class="timeline-item" onclick="toggleExpand(this)">
@@ -787,8 +844,7 @@
         </div>
       </section>
 
-      <!-- PROJECT PORTFOLIO (clickable gallery) using local .webp images -->
-      <section>
+      <section class="section" id="projects">
         <div class="section-title"><span></span>Recent projects (tap to enlarge)</div>
         <div class="projects-grid" id="gallery">
           <!-- Replace the src with your own .webp files (place them in the same folder) -->
@@ -828,7 +884,6 @@
         <p style="font-size:0.8rem; color:#64748b; margin-top:0.5rem;">* Place your own project1.webp – project4.webp in the same folder, or update the paths.</p>
       </section>
 
-      <!-- footer note -->
       <div class="footer-note">
         © 2026 Afiq Fahmi · 019-9083295 · Afqfahmi0013@gmail.com
       </div>
@@ -860,39 +915,43 @@
       document.body.style.overflow = 'auto';
     };
 
-    // ---------- ROBUST PRELOADER: waits for all images ----------
+    // ---------- ROBUST PRELOADER ----------
     (function() {
       const preloader = document.getElementById('preloader');
       const projectImages = Array.from(document.querySelectorAll('.project-img'));
       
-      // Create a promise for each image that resolves when loaded (or rejects on error, but we still count as "done")
       const imagePromises = projectImages.map(img => {
         return new Promise((resolve) => {
-          // If image already loaded, resolve immediately
           if (img.complete && img.naturalHeight !== 0) {
             resolve();
           } else {
-            // Wait for load or error (either way, we resolve so preloader hides)
             img.addEventListener('load', () => resolve());
-            img.addEventListener('error', () => {
-              // Even on error, we consider it "done" to avoid hanging
-              resolve();
-            });
+            img.addEventListener('error', () => resolve()); // still resolve on error
           }
         });
       });
 
-      // Also include any other images? we can also wait for window load as fallback
       Promise.all(imagePromises).then(() => {
-        // All images have either loaded or failed
         preloader.classList.add('hide');
       });
 
-      // Fallback: if for some reason promises don't settle within 5 seconds, hide anyway
       setTimeout(() => {
         preloader.classList.add('hide');
       }, 5000);
     })();
+
+    // ---------- SCROLL ANIMATION (Intersection Observer) ----------
+    const sections = document.querySelectorAll('.section');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }); // trigger when 10% visible
+
+    sections.forEach(section => observer.observe(section));
 
     // sidebar CTA
     document.getElementById('sidebarCta').addEventListener('click', function(e) {
